@@ -44,6 +44,8 @@ jobs:
           GIT_CLONE_PROTECTION_ACTIVE: "false" # prevents LFS from working
       - name: Build the documentation
         run: poetry run mkdocs build -c -s -d public
+      - name: Block bots to avoid indexing
+        run: 'echo -e "User-agent: *\nDisallow: /" > public/robots.txt'
       - name: Setup Pages
         uses: actions/configure-pages@v2
       - name: Upload artifact
